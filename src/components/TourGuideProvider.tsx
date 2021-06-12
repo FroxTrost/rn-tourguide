@@ -31,6 +31,8 @@ export interface TourGuideProviderProps {
   animationDuration?: number
   children: React.ReactNode
   dismissOnPress: boolean
+  disableOnPress: boolean
+  transitionWithDelay: boolean
 }
 
 export const TourGuideProvider = ({
@@ -47,6 +49,8 @@ export const TourGuideProvider = ({
   verticalOffset,
   startAtMount = false,
   dismissOnPress = false,
+  disableOnPress = true,
+  transitionWithDelay = true,
 }: TourGuideProviderProps) => {
   const [visible, setVisible] = useState<boolean | undefined>(undefined)
   const [currentStep, updateCurrentStep] = useState<IStep | undefined>()
@@ -68,7 +72,12 @@ export const TourGuideProvider = ({
 
   useEffect(() => {
     if (visible || currentStep) {
-      moveToCurrentStep()
+      if(transitionWithDelay){
+        setTimeout(moveToCurrentStep, 120)
+      }
+      else{
+        moveToCurrentStep()
+      }
     }
   }, [visible, currentStep])
 
@@ -207,6 +216,7 @@ export const TourGuideProvider = ({
             maskOffset,
             borderRadius,
             dismissOnPress,
+            disableOnPress
           }}
         />
       </TourGuideContext.Provider>

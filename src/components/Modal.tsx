@@ -33,6 +33,7 @@ export interface ModalProps {
   backdropColor: string
   labels: Labels
   dismissOnPress: boolean
+  disableOnPress: boolean
   easing(value: number): number
   stop(): void
   next(): void
@@ -316,12 +317,12 @@ export class Modal extends React.Component<ModalProps, State> {
     return (
       <View
         style={[StyleSheet.absoluteFill, { backgroundColor: 'transparent' }]}
-        pointerEvents='box-none'
+        pointerEvents= {this.props.disableOnPress ? 'auto' : 'box-none'} 
       >
         <View
           style={styles.container}
           onLayout={this.handleLayoutChange}
-          pointerEvents='box-none'
+          pointerEvents= {this.props.disableOnPress ? 'auto' : 'box-none'}
         >
           {contentVisible && (
             <>

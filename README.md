@@ -202,6 +202,8 @@ export interface TourGuideProviderProps {
   animationDuration?: number
   children: React.ReactNode
   dismissOnPress: boolean
+  disableOnPress: boolean // blocks pressing outside masked view
+  transitionWithDelay: boolean // ScrollView and Tab View
 }
 
 interface TooltipProps {
